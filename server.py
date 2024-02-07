@@ -88,9 +88,8 @@ def server(host: str, port: int) -> None:
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
         # Prepare the server socket
-        # * Fill in start (1)
-        # * Fill in end (1)
-
+        server_socket.bind((host, port))
+        server_socket.listen()
         threads = []
         print(f"Listening on {host}:{port}")
 
@@ -98,7 +97,7 @@ def server(host: str, port: int) -> None:
             try:
                 # Establish connection with client.
                 
-                client_socket, address = # * Fill in start (2) # * Fill in end (2)
+                client_socket, address = server_socket.accept()
 
                 # Create a new thread to handle the client request
                 thread = threading.Thread(target=client_handler, args=(
@@ -123,7 +122,7 @@ def client_handler(client_socket: socket.socket, client_address: tuple[str, int]
         print(f"Conection established with {client_addr}")
         while True:
             
-            data = # * Fill in start (3) # * Fill in end (3)
+            data = client_socket.recv(api.BUFFER_SIZE//8)
             if not data:
                 break
             try:
@@ -143,6 +142,7 @@ def client_handler(client_socket: socket.socket, client_address: tuple[str, int]
                     f"{client_prefix} Sending response of length {len(response)} bytes")
 
                 # * Fill in start (4)
+                client_socket.sendall(response)
                 # * Fill in end (4)
 
             except Exception as e:

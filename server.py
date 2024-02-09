@@ -89,7 +89,7 @@ def server(host: str, port: int) -> None:
 
         # Prepare the server socket
         server_socket.bind((host, port))
-        server_socket.listen()
+        server_socket.listen(BUFFER_SIZE)
         threads = []
         print(f"Listening on {host}:{port}")
 

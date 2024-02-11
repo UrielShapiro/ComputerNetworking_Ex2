@@ -90,6 +90,7 @@ def server(host: str, port: int) -> None:
         # Prepare the server socket
         server_socket.bind((host, port))    # bind the socket with the address and port
         server_socket.listen()              # start listening to the socket
+
         threads = []
         print(f"Listening on {host}:{port}")
 
@@ -97,7 +98,7 @@ def server(host: str, port: int) -> None:
             try:
                 # Establish connection with client.
                 
-                client_socket, address = server_socket.accept() # accept the connection from the client
+                client_socket, address = server_socket.accept()     # accept the connection from the client
 
                 # Create a new thread to handle the client request
                 thread = threading.Thread(target=client_handler, args=(
